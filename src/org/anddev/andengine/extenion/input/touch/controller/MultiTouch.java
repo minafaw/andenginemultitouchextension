@@ -20,8 +20,9 @@ public class MultiTouch {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	
+
 	private static Boolean SUPPORTED = null;
+	private static Boolean SUPPORTED_DISTINCT = null;
 
 	// ===========================================================
 	// Constructors
@@ -41,17 +42,24 @@ public class MultiTouch {
 	
 	public static boolean isSupported(final Context pContext) {
 		if(SUPPORTED == null) {
-			SUPPORTED = initSupported(pContext);
+			SUPPORTED = SystemUtils.isAndroidVersionOrHigher(Build.VERSION_CODES.ECLAIR_MR1) && hasFeature(pContext, PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH);
 		} 
 
 		return SUPPORTED;
 	}
+	
+	public static boolean isSupportedDistinct(final Context pContext) {
+		if(SUPPORTED_DISTINCT == null) {
+			SUPPORTED_DISTINCT = SystemUtils.isAndroidVersionOrHigher(Build.VERSION_CODES.ECLAIR_MR1) && hasFeature(pContext, PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_DISTINCT);
+		} 
 
-	private static boolean initSupported(final Context pContext) {
+		return SUPPORTED_DISTINCT;
+	}
+
+	private static boolean hasFeature(final Context pContext, final String pFeature) {
 		try{
 			final Method PackageManager_hasSystemFeatures = PackageManager.class.getMethod("hasSystemFeature",  new Class[]{String.class});
-			final boolean supported = (PackageManager_hasSystemFeatures == null) ? false : (Boolean)PackageManager_hasSystemFeatures.invoke(pContext.getPackageManager(), PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH);
-			return SystemUtils.isAndroidVersionOrHigher(Build.VERSION_CODES.ECLAIR_MR1) && supported;
+			return (PackageManager_hasSystemFeatures == null) ? false : (Boolean)PackageManager_hasSystemFeatures.invoke(pContext.getPackageManager(), pFeature);
 		}catch(Throwable t) {
 			return false;
 		}
