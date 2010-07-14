@@ -41,12 +41,10 @@ public class MultiTouchController extends BaseTouchController {
 		switch(action) {
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
-				this.onHandleTouchDown(pMotionEvent, pTouchEventCallback);
-				return true;
+				return this.onHandleTouchDown(pMotionEvent, pTouchEventCallback);
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
-				this.onHandleTouchUp(pMotionEvent, pTouchEventCallback);
-				return true;
+				return this.onHandleTouchUp(pMotionEvent, pTouchEventCallback);
 			case MotionEvent.ACTION_MOVE:
 				return this.onHandleTouchMove(pMotionEvent, pTouchEventCallback);
 			default:
