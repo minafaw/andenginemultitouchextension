@@ -8,7 +8,7 @@ import android.view.MotionEvent;
  * @author Nicolas Gramlich
  * @since 20:23:33 - 13.07.2010
  */
-public class MultiTouchControler extends BaseTouchController {
+public class MultiTouchController extends BaseTouchController {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -21,7 +21,7 @@ public class MultiTouchControler extends BaseTouchController {
 	// Constructors
 	// ===========================================================
 	
-	public MultiTouchControler() throws MultiTouchException {
+	public MultiTouchController() throws MultiTouchException {
 		if(MultiTouch.isSupportedByAndroidVersion() == false) {
 			throw new MultiTouchException();
 		}
@@ -82,8 +82,7 @@ public class MultiTouchControler extends BaseTouchController {
 	}
 
 	private int getPointerIndex(final MotionEvent pMotionEvent) {
-		/** TODO MotionEvent.ACTION_POINTER_ID_MASK is DEPRECATED !!! Actually gets the INDEX not the ID! */
-		return (pMotionEvent.getAction() & MotionEvent.ACTION_POINTER_ID_MASK) >> MotionEvent.ACTION_POINTER_ID_SHIFT;
+		return (pMotionEvent.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
 	}
 
 	// ===========================================================
