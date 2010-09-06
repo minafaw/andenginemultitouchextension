@@ -41,10 +41,11 @@ public class MultiTouchController extends BaseTouchController {
 		switch(action) {
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
-				return this.onHandleTouchDown(pMotionEvent, pTouchEventCallback);
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
-				return this.onHandleTouchUp(pMotionEvent, pTouchEventCallback);
+			case MotionEvent.ACTION_CANCEL:
+			case MotionEvent.ACTION_OUTSIDE:
+				return this.onHandleTouchAction(action, pMotionEvent, pTouchEventCallback);
 			case MotionEvent.ACTION_MOVE:
 				return this.onHandleTouchMove(pMotionEvent, pTouchEventCallback);
 			default:
@@ -66,17 +67,11 @@ public class MultiTouchController extends BaseTouchController {
 		}
 		return handled;
 	}
-
-	private boolean onHandleTouchDown(final MotionEvent pMotionEvent, final ITouchEventCallback pTouchEventCallback) {
-		final int pointerDownIndex = this.getPointerIndex(pMotionEvent);
-		final int pointerDownID = pMotionEvent.getPointerId(pointerDownIndex);
-		return BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerDownIndex), pMotionEvent.getY(pointerDownIndex), MotionEvent.ACTION_DOWN, pointerDownID, pMotionEvent, pTouchEventCallback);
-	}
-
-	private boolean onHandleTouchUp(final MotionEvent pMotionEvent, final ITouchEventCallback pTouchEventCallback) {
-		final int pointerUpIndex = this.getPointerIndex(pMotionEvent);
-		final int pointerUpID = pMotionEvent.getPointerId(pointerUpIndex);
-		return BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerUpIndex), pMotionEvent.getY(pointerUpIndex), MotionEvent.ACTION_UP, pointerUpID, pMotionEvent, pTouchEventCallback);
+	
+	private boolean onHandleTouchAction(final int pAction, final MotionEvent pMotionEvent, final ITouchEventCallback pTouchEventCallback) {
+		final int pointerIndex = this.getPointerIndex(pMotionEvent);
+		final int pointerID = pMotionEvent.getPointerId(pointerIndex);
+		return BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), pAction, pointerID, pMotionEvent, pTouchEventCallback);
 	}
 
 	private int getPointerIndex(final MotionEvent pMotionEvent) {
