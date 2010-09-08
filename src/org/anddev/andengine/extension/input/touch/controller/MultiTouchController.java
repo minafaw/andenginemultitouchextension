@@ -21,7 +21,8 @@ public class MultiTouchController extends BaseTouchController {
 	// Constructors
 	// ===========================================================
 	
-	public MultiTouchController() throws MultiTouchException {
+	public MultiTouchController(final ITouchEventCallback pTouchEventCallback) throws MultiTouchException {
+		super(pTouchEventCallback);
 		if(MultiTouch.isSupportedByAndroidVersion() == false) {
 			throw new MultiTouchException();
 		}
@@ -36,7 +37,7 @@ public class MultiTouchController extends BaseTouchController {
 	// ===========================================================
 
 	@Override
-	public boolean onHandleMotionEvent(final MotionEvent pMotionEvent, final ITouchEventCallback pTouchEventCallback) {
+	public boolean onHandleMotionEvent(final MotionEvent pMotionEvent) {
 		final int action = pMotionEvent.getAction() & MotionEvent.ACTION_MASK;
 		switch(action) {
 			case MotionEvent.ACTION_DOWN:
@@ -45,9 +46,9 @@ public class MultiTouchController extends BaseTouchController {
 			case MotionEvent.ACTION_POINTER_UP:
 			case MotionEvent.ACTION_CANCEL:
 			case MotionEvent.ACTION_OUTSIDE:
-				return this.onHandleTouchAction(action, pMotionEvent, pTouchEventCallback);
+				return this.onHandleTouchAction(action, pMotionEvent);
 			case MotionEvent.ACTION_MOVE:
-				return this.onHandleTouchMove(pMotionEvent, pTouchEventCallback);
+				return this.onHandleTouchMove(pMotionEvent);
 			default:
 				throw new IllegalArgumentException("Invalid Action detected: " + action);
 		}
@@ -57,21 +58,21 @@ public class MultiTouchController extends BaseTouchController {
 	// Methods
 	// ===========================================================
 
-	private boolean onHandleTouchMove(final MotionEvent pMotionEvent, final ITouchEventCallback pTouchEventCallback) {
+	private boolean onHandleTouchMove(final MotionEvent pMotionEvent) {
 		boolean handled = false;
 		for(int i = pMotionEvent.getPointerCount() - 1; i >= 0; i--) {
 			final int pointerIndex = i;
 			final int pointerID = pMotionEvent.getPointerId(pointerIndex);
-			final boolean handledInner = BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), MotionEvent.ACTION_MOVE, pointerID, pMotionEvent, pTouchEventCallback);
+			final boolean handledInner = BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), MotionEvent.ACTION_MOVE, pointerID, pMotionEvent);
 			handled = handled || handledInner;
 		}
 		return handled;
 	}
 	
-	private boolean onHandleTouchAction(final int pAction, final MotionEvent pMotionEvent, final ITouchEventCallback pTouchEventCallback) {
+	private boolean onHandleTouchAction(final int pAction, final MotionEvent pMotionEvent) {
 		final int pointerIndex = this.getPointerIndex(pMotionEvent);
 		final int pointerID = pMotionEvent.getPointerId(pointerIndex);
-		return BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), pAction, pointerID, pMotionEvent, pTouchEventCallback);
+		return BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), pAction, pointerID, pMotionEvent);
 	}
 
 	private int getPointerIndex(final MotionEvent pMotionEvent) {
