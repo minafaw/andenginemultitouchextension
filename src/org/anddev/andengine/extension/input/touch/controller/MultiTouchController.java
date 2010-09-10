@@ -63,7 +63,7 @@ public class MultiTouchController extends BaseTouchController {
 		for(int i = pMotionEvent.getPointerCount() - 1; i >= 0; i--) {
 			final int pointerIndex = i;
 			final int pointerID = pMotionEvent.getPointerId(pointerIndex);
-			final boolean handledInner = BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), MotionEvent.ACTION_MOVE, pointerID, pMotionEvent);
+			final boolean handledInner = this.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), MotionEvent.ACTION_MOVE, pointerID, pMotionEvent);
 			handled = handled || handledInner;
 		}
 		return handled;
@@ -72,7 +72,7 @@ public class MultiTouchController extends BaseTouchController {
 	private boolean onHandleTouchAction(final int pAction, final MotionEvent pMotionEvent) {
 		final int pointerIndex = this.getPointerIndex(pMotionEvent);
 		final int pointerID = pMotionEvent.getPointerId(pointerIndex);
-		return BaseTouchController.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), pAction, pointerID, pMotionEvent);
+		return this.fireTouchEvent(pMotionEvent.getX(pointerIndex), pMotionEvent.getY(pointerIndex), pAction, pointerID, pMotionEvent);
 	}
 
 	private int getPointerIndex(final MotionEvent pMotionEvent) {
