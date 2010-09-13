@@ -21,8 +21,7 @@ public class MultiTouchController extends BaseTouchController {
 	// Constructors
 	// ===========================================================
 	
-	public MultiTouchController(final ITouchEventCallback pTouchEventCallback) throws MultiTouchException {
-		super(pTouchEventCallback);
+	public MultiTouchController() throws MultiTouchException {
 		if(MultiTouch.isSupportedByAndroidVersion() == false) {
 			throw new MultiTouchException();
 		}
@@ -42,8 +41,10 @@ public class MultiTouchController extends BaseTouchController {
 		switch(action) {
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
+				return this.onHandleTouchAction(MotionEvent.ACTION_DOWN, pMotionEvent);
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
+				return this.onHandleTouchAction(MotionEvent.ACTION_UP, pMotionEvent);
 			case MotionEvent.ACTION_CANCEL:
 			case MotionEvent.ACTION_OUTSIDE:
 				return this.onHandleTouchAction(action, pMotionEvent);
