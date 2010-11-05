@@ -14,7 +14,8 @@
 	<property name="binfile" value="bin/andenginemultitouchextension.jar" />
 	
 	<property name="targetlist" value="../AndCards/lib/andenginemultitouchextension.jar,
-	../AndEngineExamples/lib/andenginemultitouchextension.jar" />
+		../AndEngineExamples/lib/andenginemultitouchextension.jar,
+		../FarmTower/lib/andenginemultitouchextension.jar" />
    
 	<target name="createjar" >
 		<echo>${targetfile}</echo>
