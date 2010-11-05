@@ -1,6 +1,5 @@
 package org.anddev.andengine.input.touch.detector;
 
-import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
@@ -52,11 +51,6 @@ public class PinchZoomDetector extends BaseDetector {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-
-	@Override
-	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
-		return this.onTouchEvent(pSceneTouchEvent);
-	}
 
 	@Override
 	public boolean onManagedTouchEvent(final TouchEvent pSceneTouchEvent) {
