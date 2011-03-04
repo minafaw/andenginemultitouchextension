@@ -8,7 +8,7 @@ public class MultiTouchException extends Exception {
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	
+
 	private static final long serialVersionUID = -5231480372313280777L;
 
 	// ===========================================================
@@ -20,11 +20,7 @@ public class MultiTouchException extends Exception {
 	// ===========================================================
 
 	public MultiTouchException() {
-		super();
-	}
 
-	public MultiTouchException(String pDetailMessage) {
-		super(pDetailMessage);
 	}
 
 	// ===========================================================
