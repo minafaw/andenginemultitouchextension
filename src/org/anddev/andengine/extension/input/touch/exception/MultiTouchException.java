@@ -1,4 +1,4 @@
-package org.anddev.andengine.extension.input.touch.controller;
+package org.anddev.andengine.extension.input.touch.exception;
 
 /**
  * @author Nicolas Gramlich

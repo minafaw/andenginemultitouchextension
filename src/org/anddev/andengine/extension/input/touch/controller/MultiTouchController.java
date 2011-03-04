@@ -1,5 +1,6 @@
 package org.anddev.andengine.extension.input.touch.controller;
 
+import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.controller.BaseTouchController;
 
 import android.view.MotionEvent;
