@@ -21,7 +21,8 @@
 		../FarmTowerPro/lib/andenginemultitouchextension.jar,
 		../BlockSmasher/lib/andenginemultitouchextension.jar,
 		../BlockSmasherEco/lib/andenginemultitouchextension.jar,
-		../BlockSmasherPro/lib/andenginemultitouchextension.jar" />
+		../BlockSmasherPro/lib/andenginemultitouchextension.jar,
+		../APlay/lib/andenginemultitouchextension.jar"/>
    
 	<target name="createjar" >
 		<echo>${targetfile}</echo>
