@@ -62,7 +62,7 @@ public class PinchZoomDetector extends BaseDetector {
 		switch(action) {
 			case MotionEvent.ACTION_POINTER_DOWN:
 				if(!this.mPinchZooming)  {
-					this.mInitialDistance = this.calculatePointerDistance(motionEvent);
+					this.mInitialDistance = PinchZoomDetector.calculatePointerDistance(motionEvent);
 					if(this.mInitialDistance > TRIGGER_PINCHZOOM_MINIMUM_DISTANCE_DEFAULT) {
 						this.mPinchZooming = true;
 						this.mPinchZoomDetectorListener.onPinchZoomStarted(this, pSceneTouchEvent);
@@ -78,7 +78,7 @@ public class PinchZoomDetector extends BaseDetector {
 				break;
 			case MotionEvent.ACTION_MOVE:
 				if(this.mPinchZooming) {
-					this.mCurrentDistance = this.calculatePointerDistance(motionEvent);
+					this.mCurrentDistance = PinchZoomDetector.calculatePointerDistance(motionEvent);
 					if(this.mCurrentDistance > TRIGGER_PINCHZOOM_MINIMUM_DISTANCE_DEFAULT) {
 						this.mPinchZoomDetectorListener.onPinchZoom(this, pSceneTouchEvent, this.getZoomFactor());
 					}
@@ -99,7 +99,7 @@ public class PinchZoomDetector extends BaseDetector {
 	/**
 	 * Calculate the euclidian distance between the first two fingers.
 	 */
-	private float calculatePointerDistance(final MotionEvent pMotionEvent) {
+	private static float calculatePointerDistance(final MotionEvent pMotionEvent) {
 		final float x = pMotionEvent.getX(0) - pMotionEvent.getX(1);
 		final float y = pMotionEvent.getY(0) - pMotionEvent.getY(1);
 		return FloatMath.sqrt(x * x + y * y);
