@@ -22,7 +22,7 @@
 		../BlockSmasher/lib/andenginemultitouchextension.jar,
 		../BlockSmasherEco/lib/andenginemultitouchextension.jar,
 		../BlockSmasherPro/lib/andenginemultitouchextension.jar,
-		../APlay/lib/andenginemultitouchextension.jar"/>
+		../APlayController/lib/andenginemultitouchextension.jar"/>
    
 	<target name="createjar" >
 		<echo>${targetfile}</echo>
