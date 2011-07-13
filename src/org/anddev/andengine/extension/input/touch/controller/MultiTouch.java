@@ -7,6 +7,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 /**
+ * (c) 2010 Nicolas Gramlich 
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 16:00:38 - 14.07.2010
  */

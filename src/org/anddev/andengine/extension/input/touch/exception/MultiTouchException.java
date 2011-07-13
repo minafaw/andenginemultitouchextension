@@ -1,6 +1,9 @@
 package org.anddev.andengine.extension.input.touch.exception;
 
 /**
+ * (c) 2010 Nicolas Gramlich 
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 16:26:07 - 14.07.2010
  */
